@@ -17,7 +17,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 
-class BleScope(private val activity: ComponentActivity) {
+class BLEPermission(private val activity: ComponentActivity) {
     interface InteractiveToken {
         fun proceed()
         fun cancel()
@@ -79,7 +79,7 @@ class BleScope(private val activity: ComponentActivity) {
         blePermissions.all { activity.checkSelfPermission(it) == PackageManager.PERMISSION_GRANTED }
 
 
-    fun enableBle(
+    fun enableBLE(
         onFeatureUnavailable: () -> Unit = {},
         enableBtPrompt: ((InteractiveToken) -> Unit)? = InteractiveTokenDefaults.defaultEnableBtPrompt(
             activity
@@ -99,7 +99,7 @@ class BleScope(private val activity: ComponentActivity) {
             return
         }
 
-        enableBle(
+        enableBLE(
             adapter,
             onResult = onResult,
             onFeatureUnavailable = onFeatureUnavailable,
@@ -108,7 +108,7 @@ class BleScope(private val activity: ComponentActivity) {
     }
 
 
-    fun enableBle(
+    fun enableBLE(
         bluetoothAdapter: BluetoothAdapter,
         onResult: (Boolean, BluetoothAdapter) -> Unit,
         onFeatureUnavailable: () -> Unit,
@@ -154,7 +154,7 @@ class BleScope(private val activity: ComponentActivity) {
     }
 
 
-    fun withBle(
+    fun withBLE(
         onFeatureUnavailable: () -> Unit = {},
         onBleDisabled: (() -> Unit)? = null,
         enableBtPrompt: ((InteractiveToken) -> Unit)? = InteractiveTokenDefaults.defaultEnableBtPrompt(
@@ -169,12 +169,12 @@ class BleScope(private val activity: ComponentActivity) {
         ),
         goodToGo: (BluetoothAdapter) -> Unit = {}
     ) {
-        withBlePermission(
+        withBLEPermission(
             rationalePermissionPrompt = rationalePermissionPrompt,
             permanentlyDeniedPermissionPrompt = permanentlyDeniedPermissionPrompt,
             onPermissionDenied = onPermissionDenied
         ) {
-            enableBle(
+            enableBLE(
                 onFeatureUnavailable = onFeatureUnavailable,
                 enableBtPrompt = enableBtPrompt
             ) { enabled, adapter ->
@@ -183,7 +183,7 @@ class BleScope(private val activity: ComponentActivity) {
         }
     }
 
-    fun withBlePermission(
+    fun withBLEPermission(
         onPermissionDenied: (Array<String>) -> Unit = {},
         rationalePermissionPrompt: ((PermissionInteractiveToken) -> Unit)? = InteractiveTokenDefaults.defaultRationalBlePermissionPrompt(
             activity
@@ -283,6 +283,8 @@ class BleScope(private val activity: ComponentActivity) {
                     }
 
                     override fun proceed() {
+                        // Consider this as permission denied
+                        onPermissionDenied(permanentlyDeniedPermissions)
                         openSettings()
                     }
 

@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 
-class Ble(private val context: Context) {
+class BLE(private val context: Context) {
     private val innerScope = CoroutineScope(Dispatchers.Default)
     private var scanResultList = listOf<ScanResult>()
 

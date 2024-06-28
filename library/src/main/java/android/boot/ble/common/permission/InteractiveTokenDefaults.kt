@@ -12,7 +12,7 @@ data class ButtonHandle(
 
 object InteractiveTokenDefaults {
 
-    fun defaultRationalBlePermissionPrompt(activity: Activity): (BleScope.PermissionInteractiveToken) -> Unit =
+    fun defaultRationalBlePermissionPrompt(activity: Activity): (BLEPermission.PermissionInteractiveToken) -> Unit =
         {
             baseInteractiveDialog(
                 activity,
@@ -23,7 +23,7 @@ object InteractiveTokenDefaults {
             ).show()
         }
 
-    fun defaultPermanentlyDeniedPermissionPrompt(activity: Activity): (BleScope.PermissionInteractiveToken) -> Unit =
+    fun defaultPermanentlyDeniedPermissionPrompt(activity: Activity): (BLEPermission.PermissionInteractiveToken) -> Unit =
         {
             baseInteractiveDialog(
                 activity,
@@ -34,7 +34,7 @@ object InteractiveTokenDefaults {
             ).show()
         }
 
-    fun defaultEnableBtPrompt(activity: Activity): (BleScope.InteractiveToken) -> Unit =
+    fun defaultEnableBtPrompt(activity: Activity): (BLEPermission.InteractiveToken) -> Unit =
         {
             baseInteractiveDialog(
                 activity = activity,
