@@ -4,6 +4,7 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("maven-publish")
     id("com.vanniktech.maven.publish") version "0.28.0"
 }
 
@@ -89,3 +90,34 @@ mavenPublishing {
     }
     signAllPublications()
 }
+
+///////////////AliYun Maven Publish////////////////
+val gid = "io.github.zhangwenxue"
+val ver = "1.0.0-alpha3"
+val aid = "ble-common"
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = gid
+                artifactId = aid
+                version = ver
+            }
+        }
+        repositories {
+            maven {
+                url = uri("https://packages.aliyun.com/maven/repository/2405228-release-Q427gT")
+                credentials {
+                    username = project.findProperty("aliyun.wwk.username") as String?
+                        ?: System.getenv("USERNAME")
+                    password = project.findProperty("aliyun.wwk.token") as String? ?: System.getenv(
+                        "TOKEN"
+                    )
+                }
+            }
+        }
+    }
+}
+// ./gradlew :library:publishReleasePublicationToMavenRepository
