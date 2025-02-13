@@ -90,6 +90,7 @@ mavenPublishing {
     }
     signAllPublications()
 }
+//publishReleasePublicationToMavenCentralRepository
 
 ///////////////AliYun Maven Publish////////////////
 val gid = "io.github.zhangwenxue"
