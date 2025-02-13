@@ -16,9 +16,9 @@ object InteractiveTokenDefaults {
         {
             baseInteractiveDialog(
                 activity,
-                "蓝牙权限申请提示",
-                "您需要授予蓝牙权限来使用所有功能，是否继续？",
-                ButtonHandle("继续") { it.proceed() },
+                "是否允许蓝牙数据传输？",
+                "本应用需要通过蓝牙与设备互相传输数据。",
+                ButtonHandle("同意") { it.proceed() },
                 ButtonHandle("拒绝") { it.cancel() },
             ).show()
         }
@@ -27,9 +27,9 @@ object InteractiveTokenDefaults {
         {
             baseInteractiveDialog(
                 activity,
-                "蓝牙权限申请提醒",
-                "为了正常使用软件所有功能，您需要手动授权蓝牙权限",
-                ButtonHandle("去设置") { it.proceed() },
+                "授权提示",
+                "在使用过程中，本应用需要访问蓝牙扫描和蓝牙连接权限，用于扫描和连接蓝牙设备",
+                ButtonHandle("去授权") { it.proceed() },
                 ButtonHandle("取消") { it.cancel() },
             ).show()
         }
@@ -38,8 +38,8 @@ object InteractiveTokenDefaults {
         {
             baseInteractiveDialog(
                 activity = activity,
-                "温馨提示",
-                "您的蓝牙未开启,无法正常使用软件。是否帮您开启？",
+                "蓝牙开启提示",
+                "本应用需要开启蓝牙功能，用于扫描和连接蓝牙设备。\n您的蓝牙未开启,是否帮您开启？",
                 ButtonHandle("同意") {
                     it.proceed()
                 },
