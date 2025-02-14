@@ -205,16 +205,15 @@ class BLEPermission(private val activity: ComponentActivity) {
 
 
         val permissionsToRationale = remainPermissions.filter {
-            ActivityCompat.shouldShowRequestPermissionRationale(activity, it)
+            !isPermissionPermanentlyDenied(it)
         }.toTypedArray()
 
-
-        val permissionsToRequest = remainPermissions.filter {
-            !ActivityCompat.shouldShowRequestPermissionRationale(
-                activity,
-                it
-            ) && !isPermissionPermanentlyDenied(it)
-        }.toTypedArray()
+//        val permissionsToRequest = remainPermissions.filter {
+//            !ActivityCompat.shouldShowRequestPermissionRationale(
+//                activity,
+//                it
+//            ) && !isPermissionPermanentlyDenied(it)
+//        }.toTypedArray()
 
         val permanentlyDeniedPermissions = remainPermissions.filter {
             !ActivityCompat.shouldShowRequestPermissionRationale(
@@ -250,9 +249,9 @@ class BLEPermission(private val activity: ComponentActivity) {
         }
 
 
-        if (permissionsToRequest.isNotEmpty()) {
-            requestBluetoothPermissionsLauncher.launch(permissionsToRequest)
-        }
+//        if (permissionsToRequest.isNotEmpty()) {
+//            requestBluetoothPermissionsLauncher.launch(permissionsToRequest)
+//        }
 
         if (permissionsToRationale.isNotEmpty()) {
             if (rationalePermissionPrompt != null) {
