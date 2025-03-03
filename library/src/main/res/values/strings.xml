@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ble_permission_request_msg">在使用过程中，本应用需要访问蓝牙扫描和蓝牙连接权限，用于扫描和连接蓝牙设备</string>
+    <string name="agree">同意</string>
+    <string name="cancel">拒绝</string>
+    <string name="ble_permission_setting_cfg">在使用过程中，本应用需要访问蓝牙扫描和蓝牙连接权限，用于扫描和连接蓝牙设备</string>
+    <string name="go_to_settings">去设置</string>
+</resources>

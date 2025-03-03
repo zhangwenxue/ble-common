@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
+import android.boot.ble.common.R
 import android.boot.ble.common.permission.BLEPermission.InteractiveToken
 import android.content.Context
 import android.content.Intent
@@ -54,17 +55,17 @@ class BlePermissionX(private val activity: FragmentActivity) {
             .onExplainRequestReason { scope, deniedList ->
                 scope.showRequestReasonDialog(
                     deniedList,
-                    "在使用过程中，本应用需要访问蓝牙扫描和蓝牙连接权限，用于扫描和连接蓝牙设备",
-                    "同意",
-                    "拒绝"
+                    activity.getString(R.string.ble_permission_request_msg),
+                    activity.getString(R.string.agree),
+                    activity.getString(R.string.cancel)
                 )
             }
             .onForwardToSettings { scope, deniedList ->
                 scope.showForwardToSettingsDialog(
                     deniedList,
-                    "在使用过程中，本应用需要访问蓝牙扫描和蓝牙连接权限，用于扫描和连接蓝牙设备",
-                    "去设置",
-                    "拒绝"
+                    activity.getString(R.string.ble_permission_setting_cfg),
+                    activity.getString(R.string.go_to_settings),
+                    activity.getString(R.string.cancel)
                 )
             }.request { allGranted, grantedList, deniedList ->
                 if (allGranted) {
