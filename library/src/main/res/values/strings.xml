@@ -5,4 +5,6 @@
     <string name="cancel">拒绝</string>
     <string name="ble_permission_setting_cfg">在使用过程中，本应用需要访问蓝牙扫描和蓝牙连接权限，用于扫描和连接蓝牙设备</string>
     <string name="go_to_settings">去设置</string>
+    <string name="bluetooth_not_enabled">蓝牙未开启</string>
+    <string name="enable_bt_tips">本应用需要开启蓝牙功能，用于扫描和连接蓝牙设备。\n您的蓝牙未开启,是否帮您开启？</string>
 </resources>

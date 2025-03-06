@@ -1,8 +1,7 @@
 package android.boot.ble.common.permission
 
 import android.app.Activity
-import android.widget.Toast
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import android.boot.ble.common.R
 
 data class ButtonHandle(
     val name: String,
@@ -38,14 +37,12 @@ object InteractiveTokenDefaults {
         {
             baseInteractiveDialog(
                 activity = activity,
-                "蓝牙开启提示",
-                "本应用需要开启蓝牙功能，用于扫描和连接蓝牙设备。\n您的蓝牙未开启,是否帮您开启？",
-                ButtonHandle("同意") {
+                activity.getString(R.string.bluetooth_not_enabled),
+                activity.getString(R.string.enable_bt_tips),
+                ButtonHandle(activity.getString(R.string.agree)) {
                     it.proceed()
                 },
-                ButtonHandle("拒绝") {
-                    Toast.makeText(activity, "请到设置页手动开启蓝牙开关", Toast.LENGTH_SHORT)
-                        .show()
+                ButtonHandle(activity.getString(R.string.cancel)) {
                     it.cancel()
                 }
             ).show()
@@ -63,34 +60,29 @@ fun baseInteractiveDialog(
     negativeButtonHandle: ButtonHandle? = null,
     neutralButtonHandle: ButtonHandle? = null,
     cancelAble: Boolean = false,
-) = MaterialAlertDialogBuilder(activity).apply {
-
-    setCancelable(cancelAble)
-
-    setTitle(title)
-
-    desc?.takeIf { it.isNotEmpty() }?.let {
-        setMessage(it)
-    }
-
-    positiveButtonHandle?.let {
-        setPositiveButton(it.name) { dialog, _ ->
-            it.onClick()
-            if (it.dismissButtonOnClick) dialog.dismiss()
+) = androidx.appcompat.app.AlertDialog.Builder(activity).setCancelable(cancelAble).setTitle(title)
+    .apply {
+        desc?.takeIf { it.isNotEmpty() }?.let {
+            setMessage(it)
         }
-    }
-    negativeButtonHandle?.let {
-        setNegativeButton(it.name) { dialog, _ ->
-            it.onClick()
-            if (it.dismissButtonOnClick) dialog.dismiss()
+        positiveButtonHandle?.let {
+            setPositiveButton(it.name) { dialog, _ ->
+                it.onClick()
+                if (it.dismissButtonOnClick) dialog.dismiss()
+            }
         }
-    }
 
-    neutralButtonHandle?.let {
-        setNeutralButton(it.name) { dialog, _ ->
-            it.onClick
-            if (it.dismissButtonOnClick) dialog.dismiss()
+        negativeButtonHandle?.let {
+            setNegativeButton(it.name) { dialog, _ ->
+                it.onClick()
+                if (it.dismissButtonOnClick) dialog.dismiss()
+            }
         }
-    }
 
-}.create()
+        neutralButtonHandle?.let {
+            setNeutralButton(it.name) { dialog, _ ->
+                it.onClick
+                if (it.dismissButtonOnClick) dialog.dismiss()
+            }
+        }
+    }.create()

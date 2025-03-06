@@ -5,4 +5,6 @@
     <string name="ble_permission_setting_cfg">We requires access to Bluetooth scan and Bluetooth connection permissions for scanning and connecting to Bluetooth devices.</string>
     <string name="go_to_settings">Go to Settings</string>
     <string name="ble_permission_request_msg">We requires access to Bluetooth scan and Bluetooth connection permissions for scanning and connecting to Bluetooth devices</string>
+    <string name="bluetooth_not_enabled">Bluetooth not enabled</string>
+    <string name="enable_bt_tips">We use Bluetooth for scanning and connecting to Bluetooth devices. Would you like to turn it on?</string>
 </resources>

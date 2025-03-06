@@ -63,7 +63,7 @@ mavenPublishing {
         )
     )
 
-    coordinates("io.github.zhangwenxue", "ble-common", "1.0.0-alpha5")
+    coordinates("io.github.zhangwenxue", "ble-common", "1.0.0-alpha6")
 
     pom {
         name.set("Android-Ble-Common-lib")
