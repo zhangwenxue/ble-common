@@ -63,7 +63,7 @@ mavenPublishing {
         )
     )
 
-    coordinates("io.github.zhangwenxue", "ble-common", "1.0.0-alpha6")
+    coordinates("io.github.zhangwenxue", "ble-common", "1.0.0-alpha7")
 
     pom {
         name.set("Android-Ble-Common-lib")
@@ -96,7 +96,7 @@ mavenPublishing {
 
 ///////////////AliYun Maven Publish////////////////
 val gid = "io.github.zhangwenxue"
-val ver = "1.0.0-alpha6"
+val ver = "1.0.0-alpha9"
 val aid = "ble-common"
 
 afterEvaluate {

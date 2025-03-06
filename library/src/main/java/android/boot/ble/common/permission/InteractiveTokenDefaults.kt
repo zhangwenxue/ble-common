@@ -60,7 +60,10 @@ fun baseInteractiveDialog(
     negativeButtonHandle: ButtonHandle? = null,
     neutralButtonHandle: ButtonHandle? = null,
     cancelAble: Boolean = false,
-) = androidx.appcompat.app.AlertDialog.Builder(activity).setCancelable(cancelAble).setTitle(title)
+) = androidx.appcompat.app.AlertDialog.Builder(
+    activity,
+    android.R.style.Theme_Material_Light_Dialog
+).setCancelable(cancelAble).setTitle(title)
     .apply {
         desc?.takeIf { it.isNotEmpty() }?.let {
             setMessage(it)

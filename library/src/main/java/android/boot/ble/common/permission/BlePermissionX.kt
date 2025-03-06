@@ -9,6 +9,8 @@ import android.boot.ble.common.permission.BLEPermission.InteractiveToken
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.FragmentActivity
 import com.permissionx.guolindev.PermissionX
@@ -119,26 +121,28 @@ class BlePermissionX(private val activity: FragmentActivity) {
             activity
         ),
     ) {
-        if (bluetoothAdapter.isEnabled) {
-            onFeatureUnavailable()
-            return
-        }
-        onOpenBt = onResult
-
-
-        if (enableBtPrompt != null) {
-            val prompt = object : InteractiveToken {
-                override fun proceed() {
-                    enableBtLauncher.launch(null)
-                }
-
-                override fun cancel() {
-                    onResult(false)
-                }
+        Handler(Looper.getMainLooper()).post {
+            if (bluetoothAdapter.isEnabled) {
+                onFeatureUnavailable()
+                return@post
             }
-            enableBtPrompt(prompt)
-        } else {
-            enableBtLauncher.launch(null)
+            onOpenBt = onResult
+
+
+            if (enableBtPrompt != null) {
+                val prompt = object : InteractiveToken {
+                    override fun proceed() {
+                        enableBtLauncher.launch(null)
+                    }
+
+                    override fun cancel() {
+                        onResult(false)
+                    }
+                }
+                enableBtPrompt(prompt)
+            } else {
+                enableBtLauncher.launch(null)
+            }
         }
     }
 }
