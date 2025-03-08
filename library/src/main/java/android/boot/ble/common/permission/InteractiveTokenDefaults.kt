@@ -1,6 +1,7 @@
 package android.boot.ble.common.permission
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.boot.ble.common.R
 
 data class ButtonHandle(
@@ -60,9 +61,9 @@ fun baseInteractiveDialog(
     negativeButtonHandle: ButtonHandle? = null,
     neutralButtonHandle: ButtonHandle? = null,
     cancelAble: Boolean = false,
-) = androidx.appcompat.app.AlertDialog.Builder(
+) = AlertDialog.Builder(
     activity,
-    android.R.style.Theme_Material_Light_Dialog
+    android.R.style.Theme_Material
 ).setCancelable(cancelAble).setTitle(title)
     .apply {
         desc?.takeIf { it.isNotEmpty() }?.let {

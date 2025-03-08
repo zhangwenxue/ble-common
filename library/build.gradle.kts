@@ -96,7 +96,7 @@ mavenPublishing {
 
 ///////////////AliYun Maven Publish////////////////
 val gid = "io.github.zhangwenxue"
-val ver = "1.0.0-alpha9"
+val ver = "1.0.0-alpha10"
 val aid = "ble-common"
 
 afterEvaluate {
